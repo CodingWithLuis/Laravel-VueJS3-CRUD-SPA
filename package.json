@@ -21,6 +21,8 @@
         "tailwindcss": "^2.0.2"
     },
     "dependencies": {
+        "primeicons": "^5.0.0",
+        "primevue": "^3.8.2",
         "vue": "^3.2.21",
         "vue-loader": "^16.8.3",
         "vue-router": "^4.0.12"

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 
 class ProductController extends Controller
@@ -16,7 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return ProductResource::collection(Product::all());
     }
 
     /**
@@ -27,7 +28,9 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //
+        $product = Product::create($request->validated());
+
+        return new ProductResource($product);
     }
 
     /**
@@ -38,7 +41,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return new ProductResource($product);
     }
 
     /**
@@ -50,7 +53,9 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        $product->update($request->validated());
+
+        return new ProductResource($product);
     }
 
     /**
@@ -61,6 +66,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        return response()->noContent();
     }
 }
