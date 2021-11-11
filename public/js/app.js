@@ -24788,6 +24788,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _composables_products__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../composables/products */ "./resources/js/composables/products.js");
+/* harmony import */ var primevue_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! primevue/api */ "./node_modules/primevue/api/api.esm.js");
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -24797,8 +24799,15 @@ __webpack_require__.r(__webpack_exports__);
         getProducts = _useProducts.getProducts;
 
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(getProducts);
+    var filters = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
+      'global': {
+        value: null,
+        matchMode: primevue_api__WEBPACK_IMPORTED_MODULE_2__.FilterMatchMode.CONTAINS
+      }
+    });
     return {
-      products: products
+      products: products,
+      filters: filters
     };
   }
 });
@@ -24941,42 +24950,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "flex place-content-end mb-4"
+  "class": "flex place-content-end"
 };
-var _hoisted_2 = {
-  "class": "px-4 py-2 text-white bg-blue-700 hover:bg-indigo-800 rounded-lg cursor-pointer"
-};
-
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Create product");
-
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
-
   var _component_Column = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Column");
 
   var _component_DataTable = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("DataTable");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: {
-      name: 'products.create'
-    },
-    "class": "text-sm font-medium"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_3];
-    }),
-    _: 1
-    /* STABLE */
-
-  }, 8
-  /* PROPS */
-  , ["to"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DataTable, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"flex place-content-end mb-4\">\n        <div class=\"px-4 py-2 text-white bg-blue-700 hover:bg-indigo-800 rounded-lg cursor-pointer\">\n            <router-link :to=\"{ name: 'products.create' }\" class=\"text-sm font-medium\">Create product</router-link>\n        </div>\n    </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DataTable, {
     value: $setup.products,
     responsiveLayout: "scroll",
     paginator: true,
     rows: 10,
-    rowsPerPageOptions: [10, 20, 50]
+    paginatorTemplate: "FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown",
+    rowsPerPageOptions: [10, 25, 50],
+    filters: $setup.filters,
+    currentPageReportTemplate: "Showing {first} to {last} of {totalRecords} entries"
   }, {
+    header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        type: "text",
+        "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+          return $setup.filters['global'].value = $event;
+        }),
+        placeholder: "Search...",
+        "class": "rounded-md"
+      }, null, 512
+      /* NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.filters['global'].value]])])];
+    }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Column, {
         field: "name",
@@ -24984,7 +24986,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         sortable: true
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Column, {
         field: "price",
-        header: "Price"
+        header: "Price",
+        sortable: true
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Column, {
         field: "description",
         header: "Description"
@@ -24995,7 +24998,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["value"])]);
+  , ["value", "filters"])]);
 }
 
 /***/ }),
@@ -25026,6 +25029,7 @@ alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
 
  //DataTable
 
+ //theme
 
 
 
