@@ -34,10 +34,6 @@ class StoreProductRequest extends FormRequest
             'description' => [
                 'nullable'
             ],
-            'image' => [
-                'image',
-                'mimes:jpg,jpeg,png'
-            ]
         ];
     }
 }

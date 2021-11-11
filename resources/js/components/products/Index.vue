@@ -1,6 +1,13 @@
 <template>
     <div>
-    <DataTable :value="products" responsiveLayout="scroll"
+
+    <div class="flex place-content-end mb-4">
+        <div class="px-4 py-2 text-white bg-blue-700 hover:bg-indigo-800 rounded-lg cursor-pointer">
+            <router-link :to="{ name: 'products.create' }" class="text-sm font-medium">Create product</router-link>
+        </div>
+    </div>
+
+        <DataTable :value="products" responsiveLayout="scroll"
     :paginator="true" :rows="10"
     :rowsPerPageOptions="[10,20,50]"
     >
@@ -11,20 +18,18 @@
     </div>
 </template>
 <script>
-
-import { onMounted } from 'vue'
-import useProducts from '../../composables/products'
+import { onMounted } from "vue";
+import useProducts from "../../composables/products";
 
 export default {
     setup() {
-        
-        const {products, getProducts} = useProducts()
+        const { products, getProducts } = useProducts();
 
-        onMounted(getProducts)
+        onMounted(getProducts);
 
         return {
-            products
-        }
+            products,
+        };
     },
-}
+};
 </script>
