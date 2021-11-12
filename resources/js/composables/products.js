@@ -19,7 +19,7 @@ export default function useProducts() {
 
     const getProduct = async (id) => {
 
-        const response = await axios.get(`/api/product/${id}`);
+        const response = await axios.get(`/api/products/${id}`);
 
         product.value = response.data.data
     }
@@ -42,7 +42,7 @@ export default function useProducts() {
 
         try {
 
-            await axios.put(`/api/product/${id}`, product.value)
+            await axios.put(`/api/products/${id}`, product.value)
             await router.push({ name: 'products.index' })
 
         } catch (e) {

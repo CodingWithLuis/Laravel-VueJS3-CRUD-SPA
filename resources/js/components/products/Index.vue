@@ -3,7 +3,7 @@
 
     <div class="flex place-content-end mb-4">
         <div class="px-4 py-2 text-white bg-blue-700 hover:bg-indigo-800 rounded-lg cursor-pointer">
-            <router-link :to="{ name: 'products.create' }" class="text-sm font-medium">create product</router-link>
+            <router-link :to="{ name: 'products.create' }" class="text-sm font-medium">Create product</router-link>
         </div>
     </div>
 
@@ -24,6 +24,12 @@
        </Column>
        <Column field="price" header="Price" :sortable="true"></Column>
        <Column field="description" header="Description"></Column>
+       <Column header="actions">
+            <template #body="slotProps">
+                <router-link :to="{ name: 'products.edit', params: { id: slotProps.data.id } }" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 mr-4">Edit</router-link>
+                <button class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">Delete</button>
+            </template>
+       </Column>
     </DataTable>
     </div>
 </template>
