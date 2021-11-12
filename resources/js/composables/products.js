@@ -52,6 +52,10 @@ export default function useProducts() {
         }
     }
 
+    const destroyProduct = async (id) => {
+        await axios.delete(`/api/products/${id}`)
+    }
+
     return {
         getProducts,
         getProduct,
@@ -59,6 +63,7 @@ export default function useProducts() {
         product,
         storeProduct,
         updateProduct,
+        destroyProduct,
         errors
     }
 }

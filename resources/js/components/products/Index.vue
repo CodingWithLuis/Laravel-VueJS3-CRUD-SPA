@@ -27,7 +27,7 @@
        <Column header="actions">
             <template #body="slotProps">
                 <router-link :to="{ name: 'products.edit', params: { id: slotProps.data.id } }" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 mr-4">Edit</router-link>
-                <button class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">Delete</button>
+                <button @click="deleteProduct(slotProps.data.id)" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">Delete</button>
             </template>
        </Column>
     </DataTable>
@@ -40,8 +40,16 @@ import {FilterMatchMode} from 'primevue/api';
 
 export default {
     setup() {
-        const { products, getProducts } = useProducts();
+        const { products, getProducts, destroyProduct } = useProducts();
 
+        const deleteProduct = async (id) => {
+            if (!window.confirm('Are you sure? This record will permanantly deleted')) {
+                return
+            }
+
+            await destroyProduct(id)
+            await getProducts()
+        }
         onMounted(getProducts);
 
         const filters = ref({
@@ -51,6 +59,7 @@ export default {
         return {
             products,
             filters,
+            deleteProduct
         };
     },
 };
